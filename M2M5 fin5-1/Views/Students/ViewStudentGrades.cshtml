@@ -1,0 +1,29 @@
+﻿@model M2M5_fin5_1.Controllers.StudentsController.StudentGradesViewModel
+@using System.Linq
+@{
+    ViewBag.Title = "Table of things";
+}
+
+<h2>Does this work?</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Student</th>
+            @foreach (var assignment in Model.Assignments)
+            { 
+                <th>@assignment.AssignmentName</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model.StudentGrades) { 
+            <tr>
+                <td>@student.Student.FullName</td>
+                @foreach (var grade in student.Grades) { 
+                    <td>@grade.GradeReceived</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

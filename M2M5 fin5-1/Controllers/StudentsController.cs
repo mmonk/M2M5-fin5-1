@@ -123,5 +123,41 @@ namespace M2M5_fin5_1.Controllers
             }
             base.Dispose(disposing);
         }
+
+        /// <summary>
+        /// SAM 2016-03-20 added this thingy
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ViewStudentGrades() {
+            // I want a StudentGrades model, but I need a student and their grades in order to do this.
+            List<StudentGrades> studentGrades = new List<StudentGrades>();
+            // Get all the students
+            List<Student> students = db.Students.ToList();
+            // Get all the assignments
+            List<Assignment> assignments = db.Assignments.ToList();
+
+            foreach(Student student in students){
+                StudentGrades sg = new StudentGrades();
+                sg.Student = student;
+                sg.Grades = db.Grades.Where(g => g.StudentID == student.StudentID).ToList();
+                studentGrades.Add(sg);
+            }
+
+            return View(new StudentGradesViewModel(assignments, studentGrades));
+        }
+        public class StudentGradesViewModel {
+            public List<StudentGrades> StudentGrades { get; set; }
+            public List<Assignment> Assignments { get; set; }
+            public StudentGradesViewModel(List<Assignment> assignments, List<StudentGrades> studentGrades)
+            {
+                this.Assignments = assignments;
+                this.StudentGrades = studentGrades;
+            }
+        }
+
+        public class StudentGrades {
+            public Student Student { get; set; }
+            public List<Grade> Grades { get; set; }
+        }
     }
 }
