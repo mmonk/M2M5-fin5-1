@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Table of things";
 }
-
 <h2>Does this work?</h2>
 
 <table>
@@ -11,17 +10,27 @@
         <tr>
             <th>Student</th>
             @foreach (var assignment in Model.Assignments)
-            { 
+            {
                 <th>@assignment.AssignmentName</th>
             }
         </tr>
     </thead>
     <tbody>
-        @foreach (var student in Model.StudentGrades) { 
+        @foreach (var student in Model.StudentGrades)
+        {
             <tr>
                 <td>@student.Student.FullName</td>
-                @foreach (var grade in student.Grades) { 
-                    <td>@grade.GradeReceived</td>
+
+                @foreach (var assignment in Model.Assignments)
+                {
+                   if (student.Grades.Find(g => g.AssignmentID == assignment.AssignmentID) == null)
+                    {
+                        <td></td>
+                    }
+                    else
+                    {
+                        <td>@student.Grades.Find(g=>g.AssignmentID == assignment.AssignmentID).GradeReceived</td>
+                    }
                 }
             </tr>
         }
