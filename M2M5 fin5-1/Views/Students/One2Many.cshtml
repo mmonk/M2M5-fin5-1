@@ -1,0 +1,52 @@
+﻿@model M2M5_fin5_1.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="~/Custom/css/One2Many.css" rel="stylesheet" />
+<h2>One2Many</h2>
+
+<div>
+    <h4>Student schedule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+    </dl>
+</div>
+<table>
+    
+    <tr>
+        <th>Course Schedule</th>
+    </tr>
+
+    @foreach (var item in Model.Course)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseName)
+            </td>
+            
+
+        </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

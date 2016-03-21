@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Table of things";
 }
-<h2>Does this work?</h2>
+<link href="~/Custom/css/M2M.css" rel="stylesheet" />
+<h2>Many to Many view</h2>
 
 <table>
     <thead>
@@ -29,7 +30,7 @@
                     }
                     else
                     {
-                        <td>@student.Grades.Find(g=>g.AssignmentID == assignment.AssignmentID).GradeReceived</td>
+                        <td style="text-align: center">@student.Grades.Find(g=>g.AssignmentID == assignment.AssignmentID).GradeReceived</td>
                     }
                 }
             </tr>

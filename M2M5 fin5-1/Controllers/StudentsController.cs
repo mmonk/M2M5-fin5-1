@@ -35,6 +35,23 @@ namespace M2M5_fin5_1.Controllers
             return View(student);
         }
 
+        //Custom Start
+        // GET: Students/One2Many/5
+        public ActionResult One2Many(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Student student = db.Students.Find(id);
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+            return View(student);
+        }
+        //Custom End
+
         // GET: Students/Create
         public ActionResult Create()
         {
